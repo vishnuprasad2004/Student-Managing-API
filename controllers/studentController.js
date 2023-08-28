@@ -1,6 +1,6 @@
 const Student = require('../models/studentModel.js');
 const asyncHandler = require("express-async-handler");
-
+const Ajv = require("ajv");
 
 /**
  * @route GET request api/students/
@@ -17,10 +17,10 @@ const getStudents = asyncHandler( async(req, res) => {
  */
 const getStudent = asyncHandler( async(req, res) => {
     const student = await Student.find({ rollno: req.params.rollno });
-    // if(student != []) {
-    //     res.status(404);
-    //     throw new Error("Student not Found");
-    // }
+    if(student.length == 0) {
+        res.status(404);
+        throw new Error("Student not Found");
+    }
     res.status(200).json(student);
 })
 
@@ -51,10 +51,10 @@ const createStudent = asyncHandler( async(req, res) => {
  */
 const updateStudent = asyncHandler( async(req,res) => {
     const student = await Student.find({ rollno: req.params.rollno });
-    // if(student != []) {
-    //     res.status(404);
-    //     throw new Error("Student not Found");
-    // }
+    if(student.length == 0) {
+        res.status(404);
+        throw new Error("Student not Found");
+    }
     const updatedStudent = await Student.updateOne({ rollno: req.params.rollno },req.body, { new: true });
     res.status(200).json({ message: `update student data with ${req.params.rollno}`, update: updatedStudent });
 })

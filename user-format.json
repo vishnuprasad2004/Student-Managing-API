@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type":"object",
+    "properties": {
+        "name":{
+            "type":"string"
+        },
+        "email": {
+            "type":"string",
+            "format":"email"
+        },
+        "rollno": {
+            "type":"string",
+            "pattern": "/[1-2]{1}[0-9]{1}(cseds|cse|me|cseaiml|eee)[0-9]{3,4}/g"
+        },
+        "department": {
+            "type":"string",
+            "pattern": "/[A-Za-z](^[0-9])/g"
+        }
+    }
+}
